@@ -1,0 +1,4 @@
+{
+    "mongoConn": "mongodb+srv://sagrikaa:Bluetooth23@meanstackcluster-r8xp3.azure.mongodb.net/Quizdom?retryWrites=true:",
+    "jwtSecret": "quizzieSecret"
+}
