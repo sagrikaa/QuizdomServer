@@ -20,8 +20,8 @@ const UserSchema = new mongoose.Schema({
     },
 
     date:{
-        type:Date,
-        deafult:Date.now
+        type : Date,
+        deafult :Date.now
     },
     avatar:{
         type:String
