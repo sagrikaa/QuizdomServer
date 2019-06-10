@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const Difficulty={
-    type:"easy"
+    type:['easy','medium','difficult']
 }
 
 const QuizSchema = new mongoose.Schema({
@@ -32,7 +32,7 @@ const QuizSchema = new mongoose.Schema({
             type:String,
             required:true
         },
-        options:Array,
+        options:[String],
         correctAns:String
     }],
 
