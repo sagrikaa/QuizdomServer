@@ -19,5 +19,11 @@ app.use('/api/user',require('./routes/api/user'));
 //@Auth
 app.use('/api/auth',require('./routes/api/auth'));
 
+//@Quiz
+app.use('/api/quiz',require('./routes/api/quiz'));
+
+//@Category
+app.use('/api/category',require('./routes/api/category'));
+
 //@PORT
 app.listen(PORT, ()=>console.log(`server started at ${PORT}`));

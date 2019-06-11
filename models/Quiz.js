@@ -18,7 +18,7 @@ const QuizSchema = new mongoose.Schema({
     },
 
     difficult:{
-        type:String,
+        type:Difficulty.type,
         required:true
     },
 
@@ -39,3 +39,5 @@ const QuizSchema = new mongoose.Schema({
 
 
 });
+
+module.exports=Quiz=mongoose.model('quiz',QuizSchema);
