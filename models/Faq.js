@@ -3,17 +3,17 @@ const mongoose = require('mongoose');
 const FaqSchema = new mongoose.Schema(
     {
         question:{
-            type:String
+            type:String,
+            required:true
             
         },
 
         answer:{
-            type:String
-        },
-
-        id:{
-            type:mongoose.Schema.Types.ObjectId
+            type:String,
+            equired:true
         }
+
+        
 
         
     });
