@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const Difficulty={
-    type:"easy"
+    type:['easy','medium','difficult']
 }
 
 const QuizSchema = new mongoose.Schema({
@@ -18,7 +18,7 @@ const QuizSchema = new mongoose.Schema({
     },
 
     difficult:{
-        type:String,
+        type:Difficulty.type,
         required:true
     },
 
@@ -32,10 +32,12 @@ const QuizSchema = new mongoose.Schema({
             type:String,
             required:true
         },
-        options:Array,
+        options:[String],
         correctAns:String
     }],
 
 
 
 });
+
+module.exports=Quiz=mongoose.model('quiz',QuizSchema);
