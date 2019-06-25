@@ -45,7 +45,7 @@ async (req,res)=>{
 // @desc   Insert a QuestionSet
 // @access Private
 
-router.post('/:quizId/question',[
+router.patch('/:quizId/question',[
     check('question','Question is required').not().isEmpty(),
     check('correctAns','Answer has to be provided').not().isEmpty()
 ],
@@ -57,16 +57,21 @@ async(req,res)=>{
     }
     try {
         const quiz = await Quiz.findById(req.params.quizId);
+        console.log(quiz);
         const {question,options,correctAns}=req.body;
-        const optionsArr=[];
-        if(options)  optionsArr = option.split(",");
+        let optionsArr=[];
+        if(options)  optionsArr = options.split(",");
         
         const questionSet = {
-            question,optionsArr,correctAns
+            question,options:optionsArr,correctAns
         }
 
-        await quiz.questionSet.push(questionSet);
-        // quiz.questionSet=[...quiz.questionSet,questionSet];
+        // await quiz.questionSet.push(questionSet);
+        quiz.questionset.unshift(questionSet);
+        console.log(quiz);
+        await quiz.save();
+
+        res.json(quiz);
         
     } catch (error) {
 
