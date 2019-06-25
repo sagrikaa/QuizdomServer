@@ -33,7 +33,10 @@ const QuizSchema = new mongoose.Schema({
             required:true
         },
         options:[String],
-        correctAns:String
+        correctAns:{
+            type:String,
+            required:true
+        }
     }],
 
 

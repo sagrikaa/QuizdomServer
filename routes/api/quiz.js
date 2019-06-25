@@ -41,4 +41,55 @@ async (req,res)=>{
    
 });
 
+// @route  POST api/quiz/:quizId/question
+// @desc   Insert a QuestionSet
+// @access Private
+
+router.post('/:quizId/question',[
+    check('question','Question is required').not().isEmpty(),
+    check('correctAns','Answer has to be provided').not().isEmpty()
+],
+async(req,res)=>{
+    const errors = validationResult(req);
+    
+    if((!errors.isEmpty())){
+        return res.status(400).json({errors:errors.array()})
+    }
+    try {
+        const quiz = await Quiz.findById(req.params.quizId);
+        const {question,options,correctAns}=req.body;
+        const optionsArr=[];
+        if(options)  optionsArr = option.split(",");
+        
+        const questionSet = {
+            question,optionsArr,correctAns
+        }
+
+        await quiz.questionSet.push(questionSet);
+        // quiz.questionSet=[...quiz.questionSet,questionSet];
+        
+    } catch (error) {
+
+        console.log(error);
+        return res.status(500).send('Server error');
+        
+    }
+}
+);
+
+
+//@route  GET api/quiz
+//@desc   GET all Quizzes
+//@access Public
+
+router.get('/',async (req,res)=>{
+    try{
+         const Quizes = await Quiz.find();
+         res.send(Quizes);
+
+    }catch(err){
+    console.log(err.message);
+    res.status(500).send("Server error");
+    }
+});
 module.exports= router ;
