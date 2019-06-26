@@ -25,7 +25,7 @@ router.post('/',[
         }
 
         //creating a new category
-        newFaq = await new Category({question,answer});
+        newFaq = await new Faq({question,answer});
         await newFaq.save();
         res.json(newFaq);
     } catch (error) {
