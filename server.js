@@ -1,7 +1,12 @@
 const express = require ('express');
 const app = express();
-const PORT = process.env.PORT || 2000;
+const cors = require('cors');
+const PORT = process.env.PORT || 2001;
 const connectDB = require('./config/db');
+
+
+//Cross Platform 
+app.use(cors())
 
 //conecting to database
 connectDB();
