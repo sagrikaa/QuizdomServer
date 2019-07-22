@@ -16,15 +16,15 @@ router.post('/',[
     }
 
     try {
-        //pullling values from body
+        
         const {question,answer} = req.body;
         let newFaq = await Faq.findOne({question});
-        //checking if the category already exists
+        //checking if the faq already exists
         if(newFaq){
             return res.status(400).json({error:[{"msg":"Question already exists"}]});
         }
 
-        //creating a new category
+        //creating a new question
         newFaq = await new Faq({question,answer});
         await newFaq.save();
         res.json(newFaq);
