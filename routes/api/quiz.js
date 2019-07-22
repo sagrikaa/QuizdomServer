@@ -41,6 +41,43 @@ async (req,res)=>{
    
 });
 
+//@route  GET api/quiz
+//@desc   GET all Quizzes
+//@access Public
+
+router.get('/',async (req,res)=>{
+    try{
+         const Quizes = await Quiz.find();
+         res.send(Quizes);
+
+    }catch(err){
+    console.log(err.message);
+    res.status(500).send("Server error");
+    }
+});
+
+
+
+
+//@route  DELETE api/quiz
+//@desc   DELETE a Quiz
+//@access Private
+
+router.delete('/',async (req,res)=>{
+    try{
+        console.log(req.body.id);
+        
+         Quiz.deleteOne({ _id : req.body.id});
+         res.status(200).send('Successfully Deleted');
+
+    }catch(err){
+    console.log(err.message);
+    res.status(500).send("Server error");
+    }
+});
+
+
+
 // @route  POST api/quiz/:quizId/question
 // @desc   Insert a QuestionSet
 // @access Private
@@ -83,18 +120,5 @@ async(req,res)=>{
 );
 
 
-//@route  GET api/quiz
-//@desc   GET all Quizzes
-//@access Public
 
-router.get('/',async (req,res)=>{
-    try{
-         const Quizes = await Quiz.find();
-         res.send(Quizes);
-
-    }catch(err){
-    console.log(err.message);
-    res.status(500).send("Server error");
-    }
-});
 module.exports= router ;
