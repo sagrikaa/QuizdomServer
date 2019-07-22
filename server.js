@@ -25,5 +25,8 @@ app.use('/api/quiz',require('./routes/api/quiz'));
 //@Category
 app.use('/api/category',require('./routes/api/category'));
 
+//@Faq
+app.use('/api/faq',require('./routes/api/faq'));
+
 //@PORT
 app.listen(PORT, ()=>console.log(`server started at ${PORT}`));
