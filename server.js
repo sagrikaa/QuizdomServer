@@ -1,7 +1,7 @@
 const express = require ('express');
 const app = express();
 const cors = require('cors');
-const PORT = process.env.PORT || 2000;
+const PORT = process.env.PORT || 2000 ;
 const connectDB = require('./config/db');
 
 
@@ -32,6 +32,9 @@ app.use('/api/category',require('./routes/api/category'));
 
 //@Faq
 app.use('/api/faq',require('./routes/api/faq'));
+
+//@ContactUs
+app.use('/api/contactus',require('./routes/api/contactus'));
 
 //@PORT
 app.listen(PORT, ()=>console.log(`server started at ${PORT}`));
