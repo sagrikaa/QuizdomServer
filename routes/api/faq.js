@@ -35,6 +35,18 @@ router.post('/',[
     
 });
 
+  router.get('/delete/:id', async (req, res) => {
+    try {
+        const FaqinQuestion = await Faq.findByIdAndDelete(req.params.id);
+        res.send(FaqinQuestion);
+        res.status(200).send('Successfully Deleted');
+      
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).send('server error');
+    }
+  });
+
 
 
 router.get('/',async(req,res)=>{
@@ -42,4 +54,24 @@ router.get('/',async(req,res)=>{
     res.json(await Faq.find());
     
 })
+
+
+
+router.put('/update/:id', async (req, res) => {
+    try {
+        const updatedTask = {
+            question : req.body.question,
+            answer : req.body.answer
+           
+        };
+        
+        const FaqToBeUpdated = await Faq.findByIdAndUpdate(req.params.id, updatedTask);
+        res.send(await FaqToBeUpdated.save());
+        res.status(200).send('Successfully Updated');
+        
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send("Server Error");
+    }
+  });
 module.exports=router;
