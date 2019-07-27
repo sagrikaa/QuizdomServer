@@ -31,7 +31,7 @@ async (req,res)=>{
        const quize = await new Quiz(quizFields);
 
        await quize.save();
-    
+        console.log(quize._id);
        res.json(quize);
     } catch (error) {
 
@@ -66,8 +66,8 @@ router.get('/',async (req,res)=>{
 router.delete('/',async (req,res)=>{
     try{
         console.log(req.body.id);
-        
-         Quiz.deleteOne({ _id : req.body.id});
+        console.log(await Quiz.findById(req.body.id));
+         await Quiz.deleteOne({ _id : req.body.id});
          res.status(200).send('Successfully Deleted');
 
     }catch(err){
