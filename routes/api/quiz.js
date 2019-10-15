@@ -94,20 +94,10 @@ async(req,res)=>{
     }
     try {
         const quiz = await Quiz.findById(req.params.quizId);
-        console.log(quiz);
-        const {question,options,correctAns}=req.body;
-        let optionsArr=[];
-        if(options)  optionsArr = options.split(",");
-        
-        const questionSet = {
-            question,options:optionsArr,correctAns
-        }
-
-        // await quiz.questionSet.push(questionSet);
-        quiz.questionset.unshift(questionSet);
-        console.log(quiz);
+        // const {question,options,correctAns}=req.body;
+        quiz.questionset.unshift(req.body);
+        // console.log(quiz);
         await quiz.save();
-
         res.json(quiz);
         
     } catch (error) {
