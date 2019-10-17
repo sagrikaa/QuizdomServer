@@ -57,7 +57,20 @@ router.get('/',async (req,res)=>{
 });
 
 
+//@route  GET api/quiz/:quizId
+//@desc   GET Quiz by Quiz ID
+//@access Public
 
+router.get('/:quizId',async (req,res)=>{
+    try{
+        const quiz = await Quiz.findById(req.params.quizId);
+         res.json(quiz);
+
+    }catch(err){
+    console.log(err.message);
+    res.status(500).send("Server error");
+    }
+});
 
 //@route  DELETE api/quiz
 //@desc   DELETE a Quiz
@@ -75,6 +88,7 @@ router.delete('/',async (req,res)=>{
     res.status(500).send("Server error");
     }
 });
+
 
 
 
