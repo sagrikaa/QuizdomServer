@@ -4,7 +4,7 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator/check');
 
 //@route  POST api/quiz
-//@desc   Insert a Quiz
+//@desc   Insert a Quiz without questions
 //@access Private
 router.post('/', [ check('name', 'Name is required').not().isEmpty() ], async (req, res) => {
 	const errors = validationResult(req);
@@ -14,14 +14,14 @@ router.post('/', [ check('name', 'Name is required').not().isEmpty() ], async (r
 	}
 
 	try {
-		const { name, category, difficult, description } = req.body;
+		const { name, category, difficult, description, questionset } = req.body;
 
 		const quizFields = {};
 		quizFields.name = name;
 		if (category) quizFields.category = category;
 		if (difficult) quizFields.difficult = difficult;
 		if (description) quizFields.description = description;
-
+		if (questionset) quizFields.questionset = questionset;
 		const quize = await new Quiz(quizFields);
 
 		await quize.save();
@@ -78,7 +78,7 @@ router.delete('/', async (req, res) => {
 });
 
 // @route  POST api/quiz/:quizId/question
-// @desc   Insert a QuestionSet
+// @desc   Insert a Question
 // @access Private
 
 router.patch(

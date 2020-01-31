@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 
-const Difficulty = {
-	type: [ 'easy', 'medium', 'difficult' ]
-};
+const Difficulty = [ 'easy', 'medium', 'hard' ];
 
 const QuizSchema = new mongoose.Schema({
 	name: {
@@ -16,7 +14,7 @@ const QuizSchema = new mongoose.Schema({
 	},
 
 	difficult: {
-		type: Difficulty.type,
+		type: String,
 		required: true
 	},
 
@@ -46,7 +44,7 @@ const QuizSchema = new mongoose.Schema({
 
 	published: {
 		type: Boolean,
-		deafult: false
+		default: false
 	}
 });
 
