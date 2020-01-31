@@ -1,40 +1,38 @@
-const express = require ('express');
+const express = require('express');
 const app = express();
 const cors = require('cors');
-const PORT = process.env.PORT || 2000 ;
+const PORT = process.env.PORT || 2000;
 const connectDB = require('./config/db');
 
-
-//Cross Platform 
-app.use(cors())
+//Cross Platform
+app.use(cors());
 
 //conecting to database
 connectDB();
 
-//Body parser 
+//Body parser
 app.use(express.json());
 
 //Test route
-app.get('/' ,(req,res) => res.send('API STARTED'));
+app.get('/', (req, res) => res.send('API STARTED'));
 
 //@User
-app.use('/api/user',require('./routes/api/user'));
-
+app.use('/api/user', require('./routes/api/user'));
 
 //@Auth
-app.use('/api/auth',require('./routes/api/auth'));
+app.use('/api/auth', require('./routes/api/auth'));
 
 //@Quiz
-app.use('/api/quiz',require('./routes/api/quiz'));
+app.use('/api/quiz', require('./routes/api/quiz'));
 
 //@Category
-app.use('/api/category',require('./routes/api/category'));
+app.use('/api/category', require('./routes/api/category'));
 
 //@Faq
-app.use('/api/faq',require('./routes/api/faq'));
+app.use('/api/faq', require('./routes/api/faq'));
 
 //@ContactUs
-app.use('/api/contactus',require('./routes/api/contactus'));
+app.use('/api/contactus', require('./routes/api/contactus'));
 
 //@PORT
-app.listen(PORT, ()=>console.log(`server started at ${PORT}`));
+app.listen(PORT, () => console.log(`server started at ${PORT}`));
