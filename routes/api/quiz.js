@@ -14,19 +14,21 @@ router.post('/', [ check('name', 'Name is required').not().isEmpty() ], async (r
 	}
 
 	try {
-		const { name, category, difficult, description, questionset } = req.body;
-
+		const { name, category, difficult, description, questionset, published, creatorId } = req.body;
+		console.log(req.body);
 		const quizFields = {};
 		quizFields.name = name;
 		if (category) quizFields.category = category;
 		if (difficult) quizFields.difficult = difficult;
 		if (description) quizFields.description = description;
 		if (questionset) quizFields.questionset = questionset;
-		const quize = await new Quiz(quizFields);
+		if (published) quizFields.published = published;
+		if (creatorId) quizFields.creatorId = creatorId;
+		const quiz = await new Quiz(quizFields);
 
-		await quize.save();
-		console.log(quize._id);
-		res.json(quize);
+		await quiz.save();
+		console.log(quiz._id);
+		res.json(quiz);
 	} catch (error) {
 		console.log(error);
 		return res.status(500).send('Server error');
