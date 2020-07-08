@@ -1,5 +1,6 @@
 const express = require('express');
 const Quiz = require('../../models/Quiz');
+const User = require('../../models/User');
 const router = express.Router();
 const { check, validationResult } = require('express-validator/check');
 
@@ -42,10 +43,20 @@ router.post('/', [ check('name', 'Name is required').not().isEmpty() ], async (r
 router.get('/', async (req, res) => {
 	try {
 		const Quizes = await Quiz.find();
+		Quizes.map((q) => console.log(q.getUser()));
 		res.send(Quizes);
 	} catch (err) {
 		console.log(err.message);
 		res.status(500).send('Server error');
+		const person = {
+			name: 'John Doe', // key=name value='John Doe'
+			age: 25,
+			friends: {
+				//key=friends value=Object
+				friend1: 'Natasha',
+				friend2: 'Jason'
+			}
+		};
 	}
 });
 

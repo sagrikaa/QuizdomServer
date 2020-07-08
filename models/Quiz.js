@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const User = require('../models/User');
 const Difficulty = [ 'easy', 'medium', 'hard' ];
 
 const QuizSchema = new mongoose.Schema({
@@ -45,7 +45,14 @@ const QuizSchema = new mongoose.Schema({
 	published: {
 		type: Boolean,
 		default: false
+	},
+	createdAt: {
+		type: Date,
+		default: new Date().toDateString()
 	}
 });
 
+QuizSchema.methods.getUser = async function() {
+	return await User.findById(this.creatorId).select('-password');
+};
 module.exports = Quiz = mongoose.model('quiz', QuizSchema);
