@@ -46,8 +46,8 @@ router.post(
 			}
 
 			//checking if the password is correct
-			const isMatch = bycrptjs.compare(password, user.password);
-
+			const isMatch = await bycrptjs.compare(password, user.password);
+			console.log(isMatch);
 			if (!isMatch) {
 				return res.status(400).json({ error: [ { msg: 'Invalid Credentials' } ] });
 			}
